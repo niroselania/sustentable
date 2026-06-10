@@ -1,0 +1,122 @@
+{
+  "updatedAt": 1781113347,
+  "tickets": [
+    {
+      "item": "1",
+      "ticket": "",
+      "aplicacion": "Ipacky",
+      "detalle": "No permite contar con usuarios independientes, a la hora de realizar el picking de Treggo o Pick Up hay que dejar de hacer de Andreani por un tema de configuración.",
+      "fecha_estimada": "Dependiente del Item 3",
+      "horas_estimadas": "",
+      "estado": "abierto"
+    },
+    {
+      "item": "2",
+      "ticket": "",
+      "aplicacion": "Ipacky",
+      "detalle": "Evaluar si existe otra aplicación que cumpla con los requerimientos",
+      "fecha_estimada": "2026-03-01",
+      "horas_estimadas": "",
+      "estado": "abierto"
+    },
+    {
+      "item": "3",
+      "ticket": "",
+      "aplicacion": "Shopify",
+      "detalle": "Solución raíz a la diferencia de estado entre los pedido de Treggo o Pick Up y Andreani previo al preparado. Estado \"Preparado\" o \"No preparado\"",
+      "fecha_estimada": "2025-11-01",
+      "horas_estimadas": "",
+      "estado": "abierto"
+    },
+    {
+      "item": "4",
+      "ticket": "",
+      "aplicacion": "Shopify",
+      "detalle": "Pedidos de Andreani que quedan en estado \"No Preparados\"",
+      "fecha_estimada": "2025-11-01",
+      "horas_estimadas": "",
+      "estado": "abierto"
+    },
+    {
+      "item": "5",
+      "ticket": "",
+      "aplicacion": "Shopify",
+      "detalle": "Posibilidad de descargar las etiquetas de Treggo de forma individual, identificando el nombre del archivo con el número de orden. Esto si sucede con las etiquetas de Andreani.",
+      "fecha_estimada": "2025-12-01",
+      "horas_estimadas": "",
+      "estado": "abierto"
+    },
+    {
+      "item": "6",
+      "ticket": "",
+      "aplicacion": "Shopify",
+      "detalle": "Posibilidad de seleccionar órdenes filtrando por rango de pedidos",
+      "fecha_estimada": "2026-01-01",
+      "horas_estimadas": "",
+      "estado": "abierto"
+    },
+    {
+      "item": "7",
+      "ticket": "",
+      "aplicacion": "Shopify",
+      "detalle": "Selección masiva \"Producto Listo para Retirar\" cuando se selecciona el método de envío \"Pick Up\"",
+      "fecha_estimada": "2025-12-01",
+      "horas_estimadas": "",
+      "estado": "abierto"
+    },
+    {
+      "item": "8",
+      "ticket": "",
+      "aplicacion": "Shopify",
+      "detalle": "Entender por qué no siempre se descarga el campo con el número de seguimiento de Andreani en los reportes de Matrixify",
+      "fecha_estimada": "2026-01-01",
+      "horas_estimadas": "",
+      "estado": "abierto"
+    },
+    {
+      "item": "9",
+      "ticket": "",
+      "aplicacion": "Shopify",
+      "detalle": "Entender por qué en algunos casos no se genera el número de seguimiento de Andreani",
+      "fecha_estimada": "2025-12-01",
+      "horas_estimadas": "",
+      "estado": "abierto"
+    },
+    {
+      "item": "10",
+      "ticket": "",
+      "aplicacion": "Shopify",
+      "detalle": "Identificar en qué campo se debe completar el número de seguimiento de Andreani cuando la etiqueta se genera de forma manual para que el dato quede almacenado en el mismo campo de aquellos que se generan automáticamente",
+      "fecha_estimada": "2026-01-01",
+      "horas_estimadas": "",
+      "estado": "abierto"
+    },
+    {
+      "item": "11",
+      "ticket": "",
+      "aplicacion": "Shopify",
+      "detalle": "Retomar la solicitud de Lisandro para generar las notificaciones por mail del estado de pedido para los casos de Treggo",
+      "fecha_estimada": "2025-11-01",
+      "horas_estimadas": "",
+      "estado": "abierto"
+    },
+    {
+      "item": "12",
+      "ticket": "",
+      "aplicacion": "Shopify",
+      "detalle": "Revisolver la causa raíz del problema que se genera en la facturación cuando se crea un artículo sin costo (ej: Yerba)",
+      "fecha_estimada": "2026-03-01",
+      "horas_estimadas": "",
+      "estado": "abierto"
+    },
+    {
+      "item": "13",
+      "ticket": "",
+      "aplicacion": "Andreani",
+      "detalle": "Inmplementar notifiacion de Andreani con el numero de seguimiento despues de realziada la compra( rtomar con facu el tema)",
+      "fecha_estimada": "",
+      "horas_estimadas": "",
+      "estado": "abierto"
+    }
+  ]
+}

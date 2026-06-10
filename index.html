@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#1d4ed8">
+  <link rel="icon" href="/icon.svg" type="image/svg+xml">
+  <title>Sustentable - Relevamiento Operaciones</title>
+  <style>
+    :root {
+      --bg: #f4f7fb;
+      --panel: #ffffff;
+      --ink: #172033;
+      --muted: #64748b;
+      --line: #dbe3ef;
+      --brand: #1d4ed8;
+      --brand-dark: #1e40af;
+      --ok: #15803d;
+      --warn: #b45309;
+      --danger: #b91c1c;
+      --soft: #eff6ff;
+      --shadow: 0 16px 40px rgba(23, 32, 51, .08);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "Segoe UI", Arial, sans-serif;
+    }
+
+    .app {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+
+    header {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      align-items: flex-start;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 28px;
+      line-height: 1.15;
+    }
+
+    .sub {
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 14px;
+      max-width: 720px;
+      line-height: 1.5;
+    }
+
+    .toolbar,
+    .filters,
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      box-shadow: var(--shadow);
+      padding: 16px;
+      margin-bottom: 16px;
+    }
+
+    button,
+    .file-btn {
+      border: 0;
+      border-radius: 10px;
+      padding: 10px 14px;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      background: var(--brand);
+      color: #fff;
+    }
+
+    button:hover,
+    .file-btn:hover {
+      background: var(--brand-dark);
+    }
+
+    button.secondary {
+      background: #e2e8f0;
+      color: var(--ink);
+    }
+
+    button.secondary:hover {
+      background: #cbd5e1;
+    }
+
+    button.success {
+      background: var(--ok);
+    }
+
+    button.danger {
+      background: var(--danger);
+    }
+
+    button.filter.active {
+      box-shadow: inset 0 0 0 2px rgba(255,255,255,.8);
+      transform: translateY(-1px);
+    }
+
+    button:disabled,
+    .file-btn:disabled {
+      opacity: .55;
+      cursor: not-allowed;
+    }
+
+    .file-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .file-btn input {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      cursor: pointer;
+    }
+
+    .status {
+      font-size: 13px;
+      color: var(--muted);
+      min-height: 20px;
+    }
+
+    .stats {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .stats strong {
+      color: var(--ink);
+    }
+
+    .table-wrap {
+      overflow: auto;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: var(--panel);
+      box-shadow: var(--shadow);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 1100px;
+    }
+
+    th, td {
+      border-bottom: 1px solid var(--line);
+      padding: 10px;
+      vertical-align: top;
+      text-align: left;
+      font-size: 14px;
+    }
+
+    th {
+      position: sticky;
+      top: 0;
+      background: var(--soft);
+      z-index: 1;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+      color: var(--muted);
+    }
+
+    tr:last-child td {
+      border-bottom: 0;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    input[type="date"],
+    select,
+    textarea {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 8px 10px;
+      font: inherit;
+      color: inherit;
+      background: #fff;
+    }
+
+    textarea {
+      min-height: 72px;
+      resize: vertical;
+    }
+
+    .col-item { width: 70px; }
+    .col-ticket { width: 110px; }
+    .col-aplicacion { width: 130px; }
+    .col-fecha { width: 170px; }
+    .col-horas { width: 120px; }
+    .col-estado { width: 120px; }
+    .col-actions { width: 90px; }
+
+    .badge {
+      display: inline-block;
+      padding: 4px 8px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .badge.abierto {
+      background: #dcfce7;
+      color: #166534;
+    }
+
+    .badge.cerrado {
+      background: #fee2e2;
+      color: #991b1b;
+    }
+
+    .empty {
+      padding: 40px;
+      text-align: center;
+      color: var(--muted);
+    }
+
+    @media (max-width: 900px) {
+      .app { padding: 16px; }
+      h1 { font-size: 22px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <header>
+      <div>
+        <h1>Sustentable - Relevamiento Operaciones</h1>
+        <p class="sub">
+          Planilla editable para seguimiento de tickets. Podés cargar un Excel con las mismas columnas,
+          editar en la web y exportar nuevamente.
+        </p>
+      </div>
+      <div class="stats" id="stats"></div>
+    </header>
+
+    <div class="panel">
+      <div class="toolbar">
+        <button type="button" id="addRowBtn">+ Agregar fila</button>
+        <button type="button" class="secondary" id="saveBtn">Guardar cambios</button>
+        <button type="button" class="success" id="exportBtn">Exportar Excel</button>
+        <label class="file-btn secondary">
+          Importar Excel
+          <input type="file" id="importInput" accept=".xlsx,.xls">
+        </label>
+      </div>
+      <div class="filters" style="margin-top: 12px;">
+        <button type="button" class="filter active" data-filter="todos" id="filterTodos">Todos</button>
+        <button type="button" class="filter secondary" data-filter="abierto" id="filterAbiertos">Tickets abiertos</button>
+        <button type="button" class="filter secondary" data-filter="cerrado" id="filterCerrados">Tickets cerrados</button>
+      </div>
+      <p class="status" id="status" style="margin-top: 12px;">Cargando...</p>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th class="col-item">Item</th>
+            <th class="col-ticket">Ticket</th>
+            <th class="col-aplicacion">Aplicación</th>
+            <th>Detalle</th>
+            <th class="col-fecha">Fecha estimada de resolución</th>
+            <th class="col-horas">Horas estimadas desarrollo</th>
+            <th class="col-estado">Estado</th>
+            <th class="col-actions">Acción</th>
+          </tr>
+        </thead>
+        <tbody id="tableBody"></tbody>
+      </table>
+      <div class="empty" id="emptyState" hidden>No hay tickets para mostrar con el filtro actual.</div>
+    </div>
+  </div>
+
+  <script src="/app.js"></script>
+</body>
+</html>

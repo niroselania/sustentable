@@ -1,0 +1,16 @@
+# Pegá esto tal cual en Portainer > Stacks > Web editor
+services:
+  sustentable-tickets:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: sustentable-tickets:1.0.0
+    container_name: sustentable-tickets
+    restart: unless-stopped
+    ports:
+      - "7079:8000"
+    volumes:
+      - sustentable-data:/data
+
+volumes:
+  sustentable-data:

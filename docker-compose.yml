@@ -1,0 +1,12 @@
+services:
+  sustentable-tickets:
+    build: .
+    container_name: sustentable-tickets
+    restart: unless-stopped
+    ports:
+      - "8090:8000"
+    volumes:
+      - sustentable-data:/data
+
+volumes:
+  sustentable-data:
