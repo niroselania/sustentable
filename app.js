@@ -49,6 +49,66 @@ function normalizeEstado(value) {
   return "abierto";
 }
 
+function toDateInputValue(value) {
+  const raw = String(value || "").trim();
+  if (!raw) return "";
+
+  if (/^\d{4}-\d{2}-\d{2}$/.test(raw)) return raw;
+
+  const isoMatch = raw.match(/^(\d{4})[/-](\d{1,2})[/-](\d{1,2})/);
+  if (isoMatch) {
+    const [, year, month, day] = isoMatch;
+    return `${year}-${month.padStart(2, "0")}-${day.padStart(2, "0")}`;
+  }
+
+  const arMatch = raw.match(/^(\d{1,2})[/-](\d{1,2})[/-](\d{4})/);
+  if (arMatch) {
+    const [, day, month, year] = arMatch;
+    return `${year}-${month.padStart(2, "0")}-${day.padStart(2, "0")}`;
+  }
+
+  const parsed = new Date(raw);
+  if (!Number.isNaN(parsed.getTime())) {
+    const year = parsed.getFullYear();
+    const month = String(parsed.getMonth() + 1).padStart(2, "0");
+    const day = String(parsed.getDate()).padStart(2, "0");
+    return `${year}-${month}-${day}`;
+  }
+
+  return "";
+}
+
+function renderFechaCell(ticket, realIndex) {
+  const raw = ticket.fecha_estimada || "";
+  const dateValue = toDateInputValue(raw);
+  const textValue = dateValue ? "" : raw;
+
+  if (textValue) {
+    return `
+      <div class="fecha-cell">
+        <input type="date" data-index="${realIndex}" data-field="fecha_estimada" value="">
+        <input
+          type="text"
+          class="fecha-texto"
+          data-index="${realIndex}"
+          data-field="fecha_estimada_texto"
+          value="${escapeHtml(textValue)}"
+          placeholder="Texto libre (opcional)"
+        >
+      </div>
+    `;
+  }
+
+  return `
+    <input
+      type="date"
+      data-index="${realIndex}"
+      data-field="fecha_estimada"
+      value="${escapeHtml(dateValue)}"
+    >
+  `;
+}
+
 function visibleTickets() {
   if (state.filter === "todos") return state.tickets;
   return state.tickets.filter((ticket) => normalizeEstado(ticket.estado) === state.filter);
@@ -82,7 +142,7 @@ function renderTable() {
       <td><input type="text" data-index="${realIndex}" data-field="ticket" value="${escapeHtml(ticket.ticket)}"></td>
       <td><input type="text" data-index="${realIndex}" data-field="aplicacion" value="${escapeHtml(ticket.aplicacion)}"></td>
       <td><textarea data-index="${realIndex}" data-field="detalle">${escapeHtml(ticket.detalle)}</textarea></td>
-      <td><input type="text" data-index="${realIndex}" data-field="fecha_estimada" value="${escapeHtml(ticket.fecha_estimada)}" placeholder="YYYY-MM-DD o texto"></td>
+      <td>${renderFechaCell(ticket, realIndex)}</td>
       <td><input type="text" data-index="${realIndex}" data-field="horas_estimadas" value="${escapeHtml(ticket.horas_estimadas)}"></td>
       <td>
         <select data-index="${realIndex}" data-field="estado">
@@ -114,7 +174,14 @@ function bindTableEvents() {
     const index = Number(target.dataset.index);
     const field = target.dataset.field;
     if (!Number.isInteger(index) || !field) return;
-    state.tickets[index][field] = target.value;
+
+    if (field === "fecha_estimada") {
+      state.tickets[index].fecha_estimada = target.value;
+    } else if (field === "fecha_estimada_texto") {
+      state.tickets[index].fecha_estimada = target.value;
+    } else {
+      state.tickets[index][field] = target.value;
+    }
     markDirty();
   });
 
@@ -123,13 +190,23 @@ function bindTableEvents() {
     const index = Number(target.dataset.index);
     const field = target.dataset.field;
     if (!Number.isInteger(index) || !field) return;
+
     if (field === "estado") {
       state.tickets[index][field] = normalizeEstado(target.value);
-    } else {
-      state.tickets[index][field] = target.value;
+      markDirty();
+      renderTable();
+      return;
     }
+
+    if (field === "fecha_estimada" && target.value) {
+      state.tickets[index].fecha_estimada = target.value;
+      markDirty();
+      renderTable();
+      return;
+    }
+
+    state.tickets[index][field] = target.value;
     markDirty();
-    renderTable();
   });
 
   tableBody.addEventListener("click", (event) => {
