@@ -4,7 +4,7 @@ services:
     container_name: sustentable-tickets
     restart: unless-stopped
     ports:
-      - "8090:8000"
+      - "7079:8000"
     volumes:
       - sustentable-data:/data
 
